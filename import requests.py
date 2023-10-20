@@ -152,7 +152,7 @@ def optimizeLineupPoints(players, week):
 # Example usage
 
 
-player_names = ['Buffalo Bills', 'Jalen Hurts', 'Austin Ekeler', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'DeAndre Hopkins', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
+player_names = ['Buffalo Bills', 'Jalen Hurts', 'Jaylen Waddle', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'T.J. Hockenson', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
 players = dict.fromkeys(player_names)
 for name in player_names:
     temp = {'id': '', 'position': ''}
