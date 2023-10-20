@@ -1,7 +1,3 @@
-from calendar import week
-from sqlite3 import SQLITE_TRANSACTION
-from tkinter import N
-from turtle import position
 import requests
 def get_player_id(name):
     url = "https://stage.api.fantasy.nfl.com/v3/players"
@@ -117,13 +113,17 @@ def optimizeLineupPoints(players, week):
     # find highest projected 2 RB
     RB1_points = 0
     RB2_points = 0
+    RB1 = ''
+    RB2 = ''
     for player in players:
         if players[player]['position'] == 'RB':
             players[player]['points'] = get_player_projected_points(players[player]['id'], week)
             if players[player]['points'] == None:
                 players[player]['points'] = 0
-            if players[player]['points'] > RB1_points:
+            if players[player]['points'] >= RB1_points:
+                RB2_points = RB1_points
                 RB1_points = players[player]['points']
+                RB2 = RB1
                 RB1 = player
             elif players[player]['points'] >= RB2_points:
                 RB2_points = players[player]['points']
@@ -133,13 +133,17 @@ def optimizeLineupPoints(players, week):
     # find highest projected 2 WR
     WR1_points = 0
     WR2_points = 0
+    WR1 = ''
+    WR2 = ''
     for player in players:
         if players[player]['position'] == 'WR':
             players[player]['points'] = get_player_projected_points(players[player]['id'], week)
             if players[player]['points'] == None:
                 players[player]['points'] = 0
-            if players[player]['points'] > WR1_points:
+            if players[player]['points'] >= WR1_points:
+                WR2_points = WR1_points
                 WR1_points = players[player]['points']
+                WR2 = WR1
                 WR1 = player
             elif players[player]['points'] >= WR2_points:
                 WR2_points = players[player]['points']
@@ -152,7 +156,7 @@ def optimizeLineupPoints(players, week):
 # Example usage
 
 
-player_names = ['Buffalo Bills', 'Jalen Hurts', 'Jaylen Waddle', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'T.J. Hockenson', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
+player_names = ['Buffalo Bills', 'Joe Burrow', 'Austin Ekeler', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'DeAndre Hopkins', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
 players = dict.fromkeys(player_names)
 for name in player_names:
     temp = {'id': '', 'position': ''}
