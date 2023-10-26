@@ -7,12 +7,13 @@ def get_player_id(name):
     }
 
     params = {
-        "appKey": "d3dw9q3jg3w9q3jg3w9q3jg3w9",
+        "appKey": "d3dw9q3jg3w9q3jglll3w9q3jg3w9",
         "filter[searchQuery]": f"{name}",
     }
 
     try:
         response = requests.get(url, headers=headers, params=params)
+        print(response.url)
         response.raise_for_status()  # Raise exception for 4xx/5xx status codes
         data = response.json()
         # Search for the player using first name and last name
@@ -155,8 +156,10 @@ def optimizeLineupPoints(players, week):
 
 # Example usage
 
+# player_names = ['Jordan Love', 'Saquon Barkley', 'Josh Jacobs', 'DJ Moore', 'Jaylen Waddle', 'T.J. Hockenson', 'Marquise Brown', 'New Orleans Saints', 'Joe Burrow', 'Jaylen Warren', "Ja'Marr Chase", 'Jakobi Meyers', 'Cole Kmet', 'Brett Maher', 'Jaleel McLaughlin']
+player_names = ['Buffalo Bills', 'Jalen Hurts', 'Austin Ekeler', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'DeAndre Hopkins', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
 
-player_names = ['Buffalo Bills', 'Joe Burrow', 'Austin Ekeler', "Dalton Schultz", 'Travis Etienne', 'Davante Adams', 'Michael Thomas', 'George Kittle', 'Alexander Mattison', 'Geno Smith', 'Tyler Allgeier', 'DeAndre Hopkins', 'JuJu Smith-Schuster', 'Kadarius Toney', 'Jason Myers']
+# player_names = ['Kirk Cousins', 'Breece Hall', 'Kenneth Walker', 'Stefon Diggs', 'A.J. Brown', 'Jonnu Smith', 'Joe Mixon', 'Jake Elliot', 'San Francisco 49ers', 'Trevor Lawrence', 'Jerome Ford', "Rhamondre Stevenson", 'Javonte Williams', 'Diontae Johnson', 'Courtland Sutton']
 players = dict.fromkeys(player_names)
 for name in player_names:
     temp = {'id': '', 'position': ''}
@@ -167,7 +170,7 @@ for name in player_names:
     for x, y in players.items():
         print(x, y)
 season_points = 0
-for i in range(7,14):
+for i in range(8,14):
     result, points = optimizeLineupPoints(players.copy(), i)
     season_points += points
     print(result, points, season_points)
